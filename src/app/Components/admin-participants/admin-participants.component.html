@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="wrapper fadeInDown">
+      <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> Create Admin and Speaker </h2>
+          <br><br>
+          <!-- Login Form -->
+          <form [formGroup]="participantsForm" (ngSubmit)=onSubmit(participantsForm.value)>
+              <input type="email" class="fadeIn second" placeholder="Email" formControlName="email_id" [ngClass]="{'is-invalid': submitted &&f.email_id.errors}">
+              <div *ngIf="submitted && f.email_id.errors" class="invalid-feedback">
+                  <div *ngIf="f.email_id.errors.required">Email_id is required</div>
+              </div>
+
+              <input type="text" class="fadeIn second" placeholder="Name" formControlName="name" [ngClass]="{'is-invalid': submitted &&f.name.errors}">
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+
+              <input type="submit" class="fadeIn fourth" value="{{ this.Button }}">
+          </form>
+
+      </div>
+  </div>
+</div>
+<div class="row fadeIn second">
+  <div class="col-1"></div>
+  <div class="col-10">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Speakers </h4>
+          </div>
+          <div class="card-content collapse show">
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th>Sl. No</th>
+                                  <th>Speaker Name</th>
+                                  <th>Email</th>
+                                  <th>Delete</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let participant of participants; let i = index;">
+
+                                  <th scope="row">{{i+1}}</th>
+                                  <td>{{participant.userProfileName}}</td>
+                                  <td>{{participant.username}}</td>
+                                  <td>
+                                      <!-- <div class="fonticon-wrap icon-shadow icon-shadow-danger" (click)>
+                                        <a> <i class="la la-trash la-2x"></i></a>
+                                    </div> -->
+                                      <button class="btn btn-danger" (click)="deleteParticipant(participant._id)">
+                                          X
+                                      </button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-1"></div>
+</div>

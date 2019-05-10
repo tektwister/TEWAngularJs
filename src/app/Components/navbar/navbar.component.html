@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarToggle" aria-controls="navBarToggle"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="http://www.mepcoeng.ac.in">MSEC - Sivakasi</a>
+  <div class="collapse navbar-collapse float-right" id="navBarToggle">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="nav nav-line nav-color-secondary">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/speakers">Speakers & Schedule</a>
+        </li>
+        <span *ngIf="auth.isLoggedIn()">
+          <li class="nav-item" *ngIf="isParticipant(); else adminLoggedIn">
+            <a class="nav-link" [routerLink]="['/viewFile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">View
+              Files</a>
+          </li>
+          <ng-template #adminLoggedIn>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/adminUpload']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact:true}">Upload Files</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Manage Users
+              </a>
+              <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
+                <div class="dropdown-divider"></div>
+                <a class="nav-link" [routerLink]="['/participants']" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{exact:true}">Participants</a>
+                <div class="dropdown-divider"></div>
+                <a class="nav-link" [routerLink]="['/adminParticipants']" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{exact:true}">Speakers</a>
+              </div>
+            </li>
+          </ng-template>
+        </span>
+        <li class="nav-item" *ngIf="!auth.isLoggedIn(); else loggedIn">
+          <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Login</a>
+        </li>
+        <ng-template #loggedIn>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{ currentUser.name }}
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="navbarDropdown">
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" [routerLink]="['/changePassword']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact:true}">Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" (click)="logout()">Log out</a>
+            </div>
+          </li>
+        </ng-template>
+      </ul>
+    </form>
+  </div>
+</nav>

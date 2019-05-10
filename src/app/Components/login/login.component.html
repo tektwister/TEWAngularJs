@@ -1,0 +1,23 @@
+<div class="wrapper fadeInDown">
+	<div id="formContent">
+		<!-- Tabs Titles -->
+		<h2 class="active"> SIGN IN </h2>
+		<br><br>
+		<!-- Login Form -->
+		<form class="" [formGroup]="loginForm" (ngSubmit)=onSubmit(loginForm.value)>
+			<input type="email" class="fadeIn second" placeholder="Your Email" formControlName="email_id" [ngClass]="{'is-invalid': submitted &&f.email_id.errors}">
+			<div *ngIf="submitted && f.email_id.errors" class="invalid-feedback">
+				<div *ngIf="f.email_id.errors.required">Email_id is required</div>
+			</div>
+			
+			<input type="password" class="fadeIn third" placeholder="Your Password" formControlName="password" [ngClass]="{'is-invalid': submitted &&f.password.errors}">
+			<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+				<div *ngIf="f.password.errors.required">Password is required</div>
+			</div>
+
+			<input type="submit" class="fadeIn fourth" value="{{ this.Button }}">
+		</form>
+
+
+	</div>
+</div>
